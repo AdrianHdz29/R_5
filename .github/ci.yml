@@ -1,14 +1,13 @@
 name: Node.js CI con Jest
-on: [push]  # Se ejecuta en cada push
-
+on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Clonar repositorio
-        uses: actions/checkout@v4  # Versión actualizada
+        uses: actions/checkout@v3
 
-      - name: Usar Node.js 20
+      - name: Usar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
@@ -16,5 +15,8 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
-      - name: Ejecutar pruebas con Jest
-        run: npm test
+      - name: Instalar Jest globalmente (opcional)
+        run: npm install -g jest
+
+      - name: Ejecutar pruebas
+        run: npx jest
